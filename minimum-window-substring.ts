@@ -1,8 +1,4 @@
 function minWindow(s: string, t: string): string {
-  if (t.length > s.length) {
-    return "";
-  }
-
   // need
   let needMap: Record<string, number> = {};
   let need: number = 0;
@@ -22,7 +18,7 @@ function minWindow(s: string, t: string): string {
 
   // result
   let minL = 0;
-  let minR = s.length - 1;
+  let minR = s.length; // so we can check if it was updated at all
 
   // sliding window
   let l = 0;
@@ -56,9 +52,7 @@ function minWindow(s: string, t: string): string {
     }
   }
 
-  console.log(minL, minR, "check");
-
-  return s.slice(minL, minR + 1);
+  return minR - minL + 1 > s.length ? "" : s.slice(minL, minR + 1);
 }
 
 console.log(minWindow("t", "z"));
