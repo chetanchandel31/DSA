@@ -8,7 +8,7 @@ class ListNode {
   }
 }
 
-function reverseList(head: ListNode | null): ListNode | null {
+function reverseListIterative(head: ListNode | null): ListNode | null {
   let prev: ListNode | null = null;
   let current = head;
 
@@ -21,4 +21,24 @@ function reverseList(head: ListNode | null): ListNode | null {
   }
 
   return prev;
+}
+
+function reverseList(head: ListNode | null): ListNode | null {
+  const reverseListRecursive = (
+    prev: ListNode | null,
+    curr: ListNode | null
+  ): ListNode | null => {
+    if (curr === null) {
+      return prev;
+    }
+    const nxt = curr.next;
+    curr.next = prev;
+
+    prev = curr;
+    curr = nxt;
+
+    return reverseListRecursive(prev, curr);
+  };
+
+  return reverseListRecursive(null, head);
 }
