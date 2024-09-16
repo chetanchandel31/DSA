@@ -12,7 +12,7 @@
  * }
  */
 
-class TreeNode {
+export class TreeNode {
   val: number;
   left: TreeNode | null;
   right: TreeNode | null;
@@ -24,7 +24,7 @@ class TreeNode {
 }
 
 function invertTree(root: TreeNode | null): TreeNode | null {
-  if (!root?.left || !root?.right) return null;
+  if (!root?.left || !root?.right) return root;
 
   const temp = root.left;
   root.left = root.right;
