@@ -1,5 +1,11 @@
 import { TreeNode } from "./invertBinaryTree";
 
+/*
+1. keep going left while adding to stack
+2. once reached null, pop and process 
+3. after processing, allowed to go right
+*/
+
 const tree = new TreeNode(
   5,
   new TreeNode(3, new TreeNode(2, new TreeNode(1), null), new TreeNode(4)),
