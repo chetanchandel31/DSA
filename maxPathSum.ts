@@ -2,13 +2,15 @@ import { TreeNode } from "./invertBinaryTree";
 
 /*
 - you are going from bottom most nodes to top
-- think about function that will update `res` and return largest sum WITHOUT splitting
-
 */
 
 function maxPathSum(root: TreeNode | null): number {
   let res = root?.val || 0;
 
+  /*
+  - return max sum without splitting
+  - update max sum upon splitting from current node
+  */
   function maxPath(root: TreeNode | null): number {
     if (!root) {
       return 0;
