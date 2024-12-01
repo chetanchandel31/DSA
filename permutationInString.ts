@@ -1,3 +1,7 @@
+/*
+- remove l from have and haveMap twice
+*/
+
 function checkInclusion(s1: string, s2: string): boolean {
   // need and need map
   let need = 0;
