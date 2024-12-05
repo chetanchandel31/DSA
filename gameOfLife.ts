@@ -1,44 +1,30 @@
-/*
-- 
-*/
-
-const countNeighbors = (
-  row: number,
-  col: number,
-  board: number[][]
-): number => {
+function countNeighbors(row: number, col: number, board: number[][]): number {
   const dirs = [
     [0, 1],
     [1, 0],
-    [0, -1],
     [-1, 0],
+    [0, -1],
+    [1, 1],
     [-1, -1],
     [1, -1],
-    [1, 1],
     [-1, 1],
   ];
-
   let neighborsCount = 0;
 
   for (let i = 0; i < dirs.length; i++) {
     const dir = dirs[i];
-    if (
-      row + dir[0] < board.length &&
-      row + dir[0] >= 0 &&
-      col + dir[1] < board[0].length &&
-      col + dir[1] >= 0
-    ) {
-      if (
-        board[row + dir[0]][col + dir[1]] === 1 ||
-        board[row + dir[0]][col + dir[1]] === 3
-      ) {
-        neighborsCount += 1;
+    const r = row + dir[0];
+    const c = col + dir[1];
+
+    if (r >= 0 && r < board.length && c >= 0 && c < board[0].length) {
+      if (board[r][c] === 1 || board[r][c] === 3) {
+        neighborsCount++;
       }
     }
   }
 
   return neighborsCount;
-};
+}
 
 /**
  Do not return anything, modify board in-place instead.
@@ -50,27 +36,25 @@ Any dead cell with exactly three live neighbors becomes a live cell, as if by re
  */
 function gameOfLife(board: number[][]): void {
   /*
-    original new 
-    0         0     0       
-    1         0     1
-    0         1     2
-    1         1     3
+  old   new        
+  0       0      0
+  1       0      1
+  0       1      2
+  1       1      3
   */
 
-  const rowsCount = board.length;
-  const colsCount = board[0].length;
-
-  for (let row = 0; row < rowsCount; row++) {
-    for (let col = 0; col < colsCount; col++) {
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board[0].length; col++) {
       const neighborsCount = countNeighbors(row, col, board);
 
-      // if living cell
-      if (board[row][col]) {
+      // living cell
+      if (board[row][col] === 1) {
         if (neighborsCount === 2 || neighborsCount === 3) {
           board[row][col] = 3;
         }
-      } else {
-        // dead cell
+      }
+      // dead cell
+      else if (board[row][col] === 0) {
         if (neighborsCount === 3) {
           board[row][col] = 2;
         }
@@ -78,8 +62,8 @@ function gameOfLife(board: number[][]): void {
     }
   }
 
-  for (let row = 0; row < rowsCount; row++) {
-    for (let col = 0; col < colsCount; col++) {
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board[0].length; col++) {
       if (board[row][col] === 1) {
         board[row][col] = 0;
       }
